@@ -1,0 +1,27 @@
+{% extends 'media_app/base.html' %} 
+{% block title %}Home{% endblock %} 
+
+{% block content %}
+<h1>Media Player</h1>
+{% if media %}
+
+
+<p>Title: {{ media.title }}</p>
+<p>Created at: {{ media.created_at }}</p>
+
+<p>Description: {{ media.description }}</p>
+{% if 'video in media.media_file.url' %}
+  <video src="{{media.media_file.url}}" alt="{{media.title}}" controls />
+  {% else %}
+  <audio src="{{media.media_file.url}}" alt="{{media.title}}" controls></audio>
+  {% endif %}
+  <h3><a href="{% url 'detail' media.pk %}">Title: {{ media.title }}</a></h3>
+
+
+
+
+{% else %}
+<p>No Media found.</p>
+{% endif %}
+
+{% endblock %} 

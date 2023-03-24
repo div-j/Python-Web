@@ -1,0 +1,55 @@
+{% extends 'media_app/base.html' %} 
+
+
+{% block title %}Home{% endblock %} 
+
+{% block content %}
+<section class='text-center bg-info  p-3'>
+    <h1>Watch your favourite movies here at ShowRoom!</h1>
+    <p>
+      Here you will find all the latest news, photos, and videos about our topic.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, iure quidem voluptate nobis ad nulla et est perspiciatis distinctio error nam asperiores. Suscipit sit incidunt similique rem, voluptatibus aliquam iste.
+    </p>
+    </section>
+<main class="container ">
+<div class=' row mt-3  '>
+    <!-- Display a two instance of model -->
+      <section class="col-sm-8 bg-dark text-white p-4">
+          
+      {% if media %}
+  
+        {% for item in media%}
+        <hr width='80%'>
+  <div class="home-card">
+        
+        <p>Movie/Audio id: {{ item.id }}</p>
+  
+        <img src="{{item.thumbnail.url }}" alt="{{item.title}}" width='100%' />
+        <div class="card-body">
+        <h3 class="card-title mt-2">Title: <a href="{% url 'detail' item.pk %}">{{ item.title }}</a></h3>
+        <p>Created at: {{ item.created_at }}</p>
+  
+        <p class="card-text">Title: {{ item.description }}</p>
+        </div>
+  
+    </div>
+  
+        {% endfor %}
+  
+      {% else %}
+      <p>No Media found.</p>
+      {% endif %}
+      </section>
+   
+    <!-- Display news -->
+      <aside class=' p-4 col-sm-4 text-center '>
+  
+          <h1>Latest News </h1>
+          <h2>Headline: Chat app created by a Nigerian </h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ducimus. Tempore rem expedita voluptatem architecto illum nisi doloribus repudiandae beatae suscipit! Quis, incidunt fugiat tenetur nostrum asperiores explicabo recusandae accusamus?</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa ea nisi voluptates doloremque praesentium, a quisquam numquam eveniet rerum itaque obcaecati. Saepe ducimus impedit ut distinctio voluptatum, aliquid maiores cumque.</p>
+      </aside>
+    </div>
+  </section>
+</main>
+{% endblock %}

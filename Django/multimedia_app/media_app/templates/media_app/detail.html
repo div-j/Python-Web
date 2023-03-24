@@ -1,0 +1,47 @@
+
+
+{% extends 'media_app/base.html' %}
+
+{% block content %}
+<h3><a href="{% url 'view_video' media.pk %}">Title: {{ media.title }}</a></h3>
+<p>{{ media.description }}</p>
+{% if media.media_file.content_type|slice:"video"%}
+<video width="640" height="480" controls>
+    <source src="{{ media.media_file.url }}" type="{{ media.media_file.content_type }}">
+    Your browser may not support the video tag.
+  </video>
+{% elif media.media_file.content_type|slice:"audio" %}
+<audio controls>
+    <source src="{{ media.media_file.url }}" type="{{ media.media_file.content_type }}">
+</audio>
+{% endif %}
+
+{% if media.thumbnail %}
+<img src="{{media.thumbnail.url }}" alt="{{media.title}}">
+{% endif %}
+
+{% endblock %}
+
+
+
+
+{% comment %} {% block content %}
+<h1>{{ media.title }}</h1>
+<p>{{ media.description }}</p>
+<video width="640" height="480" controls>
+  <source src="{{ media.media_file.url }}" type="{{ media.media_file.content_type }}">
+  Your browser may not support the video tag.
+</video>
+
+<h1>Search Results for "{{ query }}"</h1>
+{% if media %}
+  <ul>
+    {% for item in media %}
+      <li>{{ item.title }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No results found.</p>
+{% endif %}
+
+{% endblock %} {% endcomment %}
